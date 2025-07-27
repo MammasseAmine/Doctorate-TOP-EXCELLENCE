@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Doctorat & Recherche IA - TOP EXCELLENCE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<style>
+/* --- VARIABLES & RESET --- */
+:root {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --muted-text-color: #6c757d;
+    --primary-blue: #1e3a8a;
+    --secondary-blue: #3b82f6;
+    --accent-gold: #f59e0b;
+    --success-green: #10b981;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Lato', sans-serif;
+    --font-arabic: 'Amiri', serif;
+    --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    --gradient-secondary: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--font-sans); background-color: var(--bg-color);
+    color: var(--text-color); line-height: 1.7; overflow-x: hidden;
+}
+
+/* --- LANGUAGE SWITCHING --- */
+.lang-switcher {
+    position: fixed; top: 20px; right: 20px; z-index: 1000; display: flex;
+    gap: 10px; background: rgba(255, 255, 255, 0.95); padding: 10px;
+    border-radius: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); backdrop-filter: blur(10px);
+}
+.lang-btn {
+    padding: 8px 15px; border: none; background: transparent; cursor: pointer;
+    border-radius: 20px; font-weight: 600; transition: all 0.3s ease; color: var(--primary-blue);
+}
+.lang-btn.active { background: var(--gradient-primary); color: white; transform: scale(1.05); }
+.lang-btn:hover { background: var(--secondary-blue); color: white; }
+
+/* --- LANGUAGE CONTENT --- */
+.lang-content { display: none; }
+.lang-content.active { display: block; }
+[lang="ar"] { direction: rtl; text-align: right; font-family: var(--font-arabic); }
+[lang="ar"] .hero-content .animate-title { font-family: var(--font-arabic); }
+[lang="ar"] .module-card { border-left: none; border-right: 5px solid var(--accent-gold); }
+[lang="ar"] .module-number { left: auto; right: 30px; }
+[lang="ar"] h4, [lang="ar"] .audience-item, [lang="ar"] .support-item { flex-direction: row-reverse; }
+[lang="ar"] .form-details { text-align: right; border-left: none; border-right: 3px solid var(--accent-gold); }
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes confetti-fall {
+    0% { transform: translateY(-100%) rotateZ(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0; }
+}
+
+/* --- SECTIONS GÉNÉRALES --- */
+section { padding: 100px 5%; text-align: center; position: relative; overflow: hidden; }
+h2 {
+    font-family: var(--font-serif); font-size: 3.2rem; background: var(--gradient-primary);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 60px; position: relative; display: inline-block;
+}
+h2::after {
+    content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 4px; background: var(--gradient-secondary); border-radius: 2px;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 40px 5%; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #1e40af 100%);
+}
+.hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+    animation: float 6s ease-in-out infinite;
+}
+.logo { max-width: 500px; height: auto; margin-bottom: 40px; filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3)); animation: pulse 3s ease-in-out infinite; }
+.hero-content { max-width: 900px; position: relative; z-index: 2; text-align: center; }
+.hero-content .animate-title { font-family: var(--font-serif); font-size: 4.8rem; line-height: 1.1; margin-bottom: 30px; color: white; text-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.hero-content .highlight { background: var(--gradient-secondary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-content .animate-subtitle { font-size: 1.4rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 50px; max-width: 700px; margin-left: auto; margin-right: auto; }
+.cta-button {
+    display: inline-block; padding: 20px 45px; font-size: 1.2rem; font-weight: 700; color: var(--primary-blue);
+    background: white; border: 3px solid white; border-radius: 50px; text-decoration: none; transition: all 0.4s ease;
+    position: relative; overflow: hidden; z-index: 1;
+}
+.cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--gradient-primary); transition: left 0.4s ease; z-index: -1; }
+.cta-button:hover::before { left: 0; }
+.cta-button:hover { color: white; transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
+
+/* --- GOAL & CONFETTI SECTION --- */
+.goal-section { background: #0f172a; color: white; padding: 120px 5%; }
+.goal-section h2 { color: white; -webkit-text-fill-color: white; font-size: 3.5rem; }
+.goal-section h2::after { background: var(--gradient-secondary); }
+.goal-section p { font-size: 1.3rem; max-width: 700px; margin: -20px auto 0; color: rgba(255, 255, 255, 0.8); }
+.confetti-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; }
+.confetti { position: absolute; width: 10px; height: 10px; opacity: 0; animation: confetti-fall 4s linear infinite; }
+
+/* --- AUDIENCE SECTION --- */
+.target-audience-section { background: var(--bg-color); }
+.audience-intro { font-size: 1.2rem; color: var(--muted-text-color); max-width: 800px; margin: -30px auto 50px auto; }
+.audience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; text-align: left; }
+.audience-item {
+    background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.07); font-size: 1.1rem;
+    font-weight: 600; color: var(--primary-blue); display: flex; align-items: center; gap: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.audience-item:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(30, 58, 138, 0.1); }
+.audience-item .icon { font-size: 1.8rem; color: var(--secondary-blue); }
+
+/* --- BENEFITS SECTION --- */
+.intro-section { background: white; }
+.benefits-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 60px; }
+.benefit-card { background: white; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); transition: all 0.4s ease; position: relative; border-top: 5px solid var(--secondary-blue); }
+.benefit-card:hover { transform: translateY(-15px); box-shadow: 0 20px 60px rgba(30, 58, 138, 0.15); }
+.benefit-card .icon { width: 80px; height: 80px; background: var(--gradient-secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; font-size: 2rem; }
+.benefit-card h3 { font-family: var(--font-serif); font-size: 1.6rem; color: var(--primary-blue); margin-bottom: 20px; }
+.benefit-card p { color: var(--muted-text-color); line-height: 1.8; }
+
+/* --- PROGRAM SECTION --- */
+.program-section { background: var(--bg-color); }
+.modules-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-top: 60px; max-width: 1200px; margin-left: auto; margin-right: auto; }
+.module-card { background: white; padding: 35px; border-radius: 15px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); transition: all 0.3s ease; position: relative; border-left: 5px solid var(--accent-gold); }
+.module-card:hover { transform: translateY(-8px); box-shadow: 0 15px 45px rgba(0,0,0,0.12); }
+.module-number { position: absolute; top: -15px; left: 30px; background: var(--gradient-primary); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
+.module-card h3 { font-family: var(--font-serif); font-size: 1.4rem; color: var(--primary-blue); margin-bottom: 15px; margin-top: 10px; }
+.module-card p { color: var(--muted-text-color); line-height: 1.7; }
+
+/* --- SUPPORT SECTION --- */
+.support-section { background: white; }
+.support-intro { font-size: 1.2rem; color: var(--muted-text-color); max-width: 800px; margin: -30px auto 50px auto; }
+.support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+.support-item { background: #f8f9fa; border: 2px solid #e9ecef; padding: 30px; border-radius: 15px; transition: all 0.3s ease; }
+.support-item:hover { border-color: var(--secondary-blue); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1); }
+.support-item .icon { font-size: 2.5rem; margin-bottom: 20px; color: var(--primary-blue); }
+.support-item h3 { font-family: var(--font-serif); font-size: 1.5rem; color: var(--primary-blue); margin-bottom: 15px; }
+.support-item p { color: var(--muted-text-color); }
+
+/* --- INSCRIPTION SECTION --- */
+.inscription-section { background: var(--gradient-primary); }
+.inscription-section h2 { color: white; -webkit-text-fill-color: white; }
+.inscription-section h2::after { background: var(--gradient-secondary); }
+.form-container { max-width: 600px; margin: 40px auto 0 auto; background: rgba(255, 255, 255, 0.1); padding: 50px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+.form-instruction { margin-bottom: 25px; font-size: 1.2rem; color: rgba(255, 255, 255, 0.9); }
+.form-details {
+    margin: 0 auto 30px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    max-width: 400px;
+    border-left: 3px solid var(--accent-gold);
+    text-align: left;
+}
+.form-details p { margin: 5px 0; font-size: 1.1rem; color: rgba(255, 255, 255, 0.95); }
+.form-details strong { color: var(--accent-gold); }
+.google-form-button { display: inline-block; padding: 20px 50px; font-size: 1.2rem; font-weight: 700; color: var(--primary-blue); background: white; border-radius: 50px; text-decoration: none; transition: all 0.4s ease; position: relative; overflow: hidden; }
+.google-form-button:hover { color: white; transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+.google-form-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: var(--gradient-secondary); transition: left 0.4s ease; z-index: -1; }
+.google-form-button:hover::before { left: 0; }
+.form-help { margin-top: 25px; color: rgba(255, 255, 255, 0.8); font-size: 1rem; }
+
+/* --- FOOTER --- */
+footer { padding: 60px 5% 30px; text-align: center; background: #0f172a; color: rgba(255,255,255,0.8); }
+footer .copyright { margin-bottom: 30px; font-size: 1.1rem; }
+.contact-info { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 20px; }
+footer a { color: #fbbf24; text-decoration: none; font-weight: 700; transition: all 0.3s ease; }
+footer a:hover { color: white; text-decoration: underline; }
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .lang-switcher { top: 10px; right: 10px; padding: 8px; }
+    .lang-btn { padding: 6px 12px; font-size: 0.9rem; }
+    h2, .goal-section h2 { font-size: 2.5rem; }
+    .hero { min-height: 90vh; padding: 20px 5%; }
+    .hero-content .animate-title { font-size: 3.2rem; }
+    .logo { max-width: 250px; margin-bottom: 30px; }
+    .audience-grid, .benefits-container, .support-grid { grid-template-columns: 1fr; gap: 20px; }
+    .modules-container { grid-template-columns: 1fr; gap: 25px; }
+    .contact-info { flex-direction: column; gap: 20px; }
+    section { padding: 80px 5%; }
+}
+@media (max-width: 480px) {
+    .hero-content .animate-title { font-size: 2.8rem; }
+    .cta-button, .google-form-button { padding: 15px 30px; font-size: 1rem; }
+    .form-container { padding: 30px 20px; }
+}
+</style>
+<body>
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('fr')">FR</button>
+        <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('ar')">AR</button>
+    </div>
+
+    <!-- French Content -->
+    <div class="lang-content active" id="content-fr">
+        <header class="hero">
+            <img src="logo.png" alt="Logo TOP EXCELLENCE" class="logo">
+            <div class="hero-content">
+                <h1 class="animate-title">Maîtrisez la <span class="highlight">Recherche Doctorale</span> avec l'IA</h1>
+                <p class="animate-subtitle">Formation complète par <strong>TOP EXCELLENCE</strong> pour révolutionner votre approche de la recherche académique grâce à l'intelligence artificielle.</p>
+                <a href="#inscription-fr" class="cta-button">Commencer la Formation</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="goal-section" id="goal-fr">
+                <div class="confetti-container"></div>
+                <h2>Votre Objectif : Un Article Publié</h2>
+                <p>Notre formation n'est pas seulement une liste d'outils. C'est une méthode complète conçue pour vous mener de la page blanche à la publication dans une revue de renom.</p>
+            </section>
+            
+            <section class="target-audience-section" id="for-whom-fr">
+                <h2>Pour Qui est cette Formation ?</h2>
+                <p class="audience-intro">Cette formation est conçue pour un large éventail de doctorants et de chercheurs souhaitant intégrer l'IA dans leur méthodologie. Elle est particulièrement pertinente pour les domaines suivants :</p>
+                <div class="audience-grid">
+                    <div class="audience-item"><span class="icon">💻</span> Informatique & Ingénierie</div>
+                    <div class="audience-item"><span class="icon">🧬</span> Biologie & Sciences de la Vie</div>
+                    <div class="audience-item"><span class="icon">👥</span> Sciences Humaines & Sociales</div>
+                    <div class="audience-item"><span class="icon">📖</span> Littérature & Arts</div>
+                    <div class="audience-item"><span class="icon">⚖️</span> Droit & Sciences Politiques</div>
+                    <div class="audience-item"><span class="icon">📈</span> Économie & Gestion</div>
+                </div>
+            </section>
+            
+            <section class="intro-section" id="about-fr">
+                <h2>Pourquoi cette Formation ?</h2>
+                <div class="benefits-container">
+                    <div class="benefit-card"><div class="icon">🔍</div><h3>Recherche Intelligente</h3><p>Maîtrisez les techniques avancées de recherche d'articles et l'utilisation de l'IA pour optimiser vos découvertes bibliographiques.</p></div>
+                    <div class="benefit-card"><div class="icon">🤖</div><h3>Rédaction Assistée par IA</h3><p>Apprenez à utiliser les outils d'IA pour améliorer votre écriture académique, structurer vos idées et produire un contenu de qualité supérieure.</p></div>
+                    <div class="benefit-card"><div class="icon">📊</div><h3>Visualisation des Données</h3><p>Transformez vos données et textes en graphiques percutants grâce aux outils d'IA de visualisation et de présentation.</p></div>
+                    <div class="benefit-card"><div class="icon">📚</div><h3>Analyse Documentaire</h3><p>Interagissez avec vos PDFs sans limites, analysez des images scientifiques et extrayez des informations cruciales automatiquement.</p></div>
+                    <div class="benefit-card"><div class="icon">⚖️</div><h3>Évaluation des Journaux</h3><p>Apprenez à identifier les journaux de qualité, comprendre les différents types d'articles et évaluer la crédibilité des sources.</p></div>
+                    <div class="benefit-card"><div class="icon">🎯</div><h3>Prompting Avancé</h3><p>Maîtrisez l'art du prompting pour obtenir les meilleurs résultats avec les IA génératives et optimiser votre productivité.</p></div>
+                </div>
+            </section>
+
+            <section class="program-section" id="programme-fr">
+                <h2>Programme de Formation</h2>
+                <div class="modules-container">
+                    <div class="module-card"><div class="module-number">1</div><h3>Recherche d'Articles Scientifiques</h3><p>Stratégies de recherche avancées, bases de données spécialisées, et techniques de filtrage intelligent.</p></div>
+                    <div class="module-card"><div class="module-number">2</div><h3>Rédaction Assistée par IA</h3><p>Utilisation des IA pour la structuration, la rédaction collaborative, et l'amélioration du style académique.</p></div>
+                    <div class="module-card"><div class="module-number">3</div><h3>Outils IA pour les Documents</h3><p>Chat illimité avec PDFs, analyse d'images scientifiques, transcription automatique et agents IA spécialisés.</p></div>
+                    <div class="module-card"><div class="module-number">4</div><h3>Gestion de Recherche avec l'IA</h3><p>Organiser et résumer votre bibliothèque (Zotero, ResearchRabbit) et créer des cartes de connaissances.</p></div>
+                    <div class="module-card"><div class="module-number">5</div><h3>Visualisation et Présentation</h3><p>Création de graphiques, génération de présentations PowerPoint et transformation de données en visuels.</p></div>
+                    <div class="module-card"><div class="module-number">6</div><h3>Types d'Articles Académiques</h3><p>Différences entre surveys, taxonomies, reviews, systematic reviews et autres formats.</p></div>
+                    <div class="module-card"><div class="module-number">7</div><h3>Évaluation des Journaux</h3><p>Critères de qualité, impact factor, prédateurs académiques et sélection des meilleures revues.</p></div>
+                </div>
+            </section>
+            
+            <section class="support-section" id="support-fr">
+                <h2>Plus qu'une Formation, un Partenariat</h2>
+                <p class="support-intro">Notre engagement ne s'arrête pas à la fin de la formation. Nous vous accompagnons jusqu'à la réussite de votre objectif : la publication.</p>
+                <div class="support-grid">
+                    <div class="support-item"><div class="icon">📄</div><h3>Relecture de votre Article</h3><p>Bénéficiez d'une relecture critique de votre premier article rédigé avec nos méthodes pour en assurer la qualité.</p></div>
+                    <div class="support-item"><div class="icon">🎯</div><h3>Aide au Choix du Journal</h3><p>Nous vous aidons à identifier et à choisir la revue la plus pertinente et prestigieuse pour votre publication.</p></div>
+                    <div class="support-item"><div class="icon">💬</div><h3>Support Continu</h3><p>Accédez à un groupe de suivi pour poser vos questions et obtenir de l'aide même après la fin du programme.</p></div>
+                </div>
+            </section>
+
+            <section class="inscription-section" id="inscription-fr">
+                <h2>Prêt à Publier votre Article ?</h2>
+                <p class="support-intro">Rejoignez-nous et transformez votre recherche doctorale en une publication de premier plan. Places limitées.</p>
+                <div class="form-container">
+                    <p class="form-instruction">Remplissez le formulaire pour réserver votre place.</p>
+                    <div class="form-details">
+                        <p><strong>Durée :</strong> 30 heures de formation pratique.</p>
+                        <p><strong>Tarif :</strong> Contactez-nous par email pour plus d'informations.</p>
+                    </div>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdh3ShlxOE_Nql94Q7OEwktxgnByBLgMiBqrzSY5Av1rMuSXA/viewform?usp=dialog" class="google-form-button">S'inscrire Maintenant</a>
+                    <p class="form-help">Vous recevrez une confirmation par email après votre inscription.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p class="copyright">© 2025 TOP EXCELLENCE - Tous droits réservés.</p>
+            <div class="contact-info">
+                <p>Contact : <a href="tel:0770865634">0770 86 56 34</a></p>
+                <p>Email : <a href="mailto:Groupetopexcellence@gmail.com">Groupetopexcellence@gmail.com</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- English Content -->
+    <div class="lang-content" id="content-en">
+        <header class="hero">
+            <img src="logo.png" alt="TOP EXCELLENCE Logo" class="logo">
+            <div class="hero-content">
+                <h1 class="animate-title">Master <span class="highlight">Doctoral Research</span> with AI</h1>
+                <p class="animate-subtitle">Complete training by <strong>TOP EXCELLENCE</strong> to revolutionize your academic research approach using artificial intelligence.</p>
+                <a href="#inscription-en" class="cta-button">Start Training</a>
+            </div>
+        </header>
+        <main>
+            <section class="goal-section" id="goal-en">
+                <div class="confetti-container"></div>
+                <h2>Your Goal: A Published Article</h2>
+                <p>Our training isn't just a list of tools. It's a complete method designed to take you from a blank page to publication in a reputable journal.</p>
+            </section>
+
+            <section class="target-audience-section" id="for-whom-en">
+                <h2>Who Is This Training For?</h2>
+                <p class="audience-intro">This training is designed for a wide range of doctoral candidates and researchers who want to integrate AI into their methodology. It is particularly relevant for the following fields:</p>
+                <div class="audience-grid">
+                    <div class="audience-item"><span class="icon">💻</span> Computer Science & Engineering</div>
+                    <div class="audience-item"><span class="icon">🧬</span> Biology & Life Sciences</div>
+                    <div class="audience-item"><span class="icon">👥</span> Humanities & Social Sciences</div>
+                    <div class="audience-item"><span class="icon">📖</span> Literature & Arts</div>
+                    <div class="audience-item"><span class="icon">⚖️</span> Law & Political Science</div>
+                    <div class="audience-item"><span class="icon">📈</span> Economics & Management</div>
+                </div>
+            </section>
+            
+            <section class="intro-section" id="about-en">
+                <h2>Why This Training?</h2>
+                <div class="benefits-container">
+                    <div class="benefit-card"><div class="icon">🔍</div><h3>Intelligent Search</h3><p>Master advanced techniques for finding scientific articles and using AI to optimize your literature discovery process.</p></div>
+                    <div class="benefit-card"><div class="icon">🤖</div><h3>AI-Assisted Writing</h3><p>Learn to use AI tools to improve your academic writing, structure your ideas, and produce higher-quality content.</p></div>
+                    <div class="benefit-card"><div class="icon">📊</div><h3>Data Visualization</h3><p>Transform your data and text into compelling charts and presentations with AI-powered visualization tools.</p></div>
+                    <div class="benefit-card"><div class="icon">📚</div><h3>Document Analysis</h3><p>Interact with your PDFs without limits, analyze scientific images, and automatically extract crucial information.</p></div>
+                    <div class="benefit-card"><div class="icon">⚖️</div><h3>Journal Evaluation</h3><p>Learn how to identify quality journals, understand different article types, and assess the credibility of sources.</p></div>
+                    <div class="benefit-card"><div class="icon">🎯</div><h3>Advanced Prompting</h3><p>Master the art of prompting to get the best results from generative AI and boost your productivity.</p></div>
+                </div>
+            </section>
+
+            <section class="program-section" id="programme-en">
+                <h2>Training Program</h2>
+                <div class="modules-container">
+                    <div class="module-card"><div class="module-number">1</div><h3>Scientific Article Research</h3><p>Advanced search strategies, specialized databases, and intelligent filtering techniques.</p></div>
+                    <div class="module-card"><div class="module-number">2</div><h3>AI-Assisted Writing</h3><p>Using AI for outlining, collaborative writing, and improving academic style.</p></div>
+                    <div class="module-card"><div class="module-number">3</div><h3>AI Tools for Documents</h3><p>Unlimited chat with PDFs, scientific image analysis, and specialized AI agents.</p></div>
+                    <div class="module-card"><div class="module-number">4</div><h3>AI for Research Management</h3><p>Organize and summarize your library (Zotero, ResearchRabbit) and create knowledge maps.</p></div>
+                    <div class="module-card"><div class="module-number">5</div><h3>Visualization & Presentation</h3><p>Automatic chart creation, presentation generation, and transforming data into visuals.</p></div>
+                    <div class="module-card"><div class="module-number">6</div><h3>Types of Academic Articles</h3><p>Differences between surveys, taxonomies, reviews, systematic reviews, and other formats.</p></div>
+                    <div class="module-card"><div class="module-number">7</div><h3>Journal Evaluation</h3><p>Quality criteria, impact factor, predatory journals, and selecting the best journals.</p></div>
+                </div>
+            </section>
+
+            <section class="support-section" id="support-en">
+                <h2>More Than Training, A Partnership</h2>
+                <p class="support-intro">Our commitment doesn't end when the training does. We support you until you achieve your goal: publication.</p>
+                <div class="support-grid">
+                    <div class="support-item"><div class="icon">📄</div><h3>Article Draft Review</h3><p>Get a critical review of your first article written with our methods to ensure its quality.</p></div>
+                    <div class="support-item"><div class="icon">🎯</div><h3>Journal Selection Help</h3><p>We help you identify and choose the most relevant and prestigious journal for your publication.</p></div>
+                    <div class="support-item"><div class="icon">💬</div><h3>Ongoing Support</h3><p>Access a follow-up group to ask questions and get help even after the program ends.</p></div>
+                </div>
+            </section>
+            
+            <section class="inscription-section" id="inscription-en">
+                <h2>Ready to Publish Your Article?</h2>
+                <p class="support-intro">Join us and turn your doctoral research into a top-tier publication. Limited spots available.</p>
+                <div class="form-container">
+                    <p class="form-instruction">Fill out the form to reserve your spot.</p>
+                     <div class="form-details">
+                        <p><strong>Duration:</strong> 30 hours of practical training.</p>
+                        <p><strong>Price:</strong> Contact us by email for more information.</p>
+                    </div>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdh3ShlxOE_Nql94Q7OEwktxgnByBLgMiBqrzSY5Av1rMuSXA/viewform?usp=dialog" class="google-form-button">Register Now</a>
+                    <p class="form-help">You will receive a confirmation email after registering.</p>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p class="copyright">© 2025 TOP EXCELLENCE - All rights reserved.</p>
+            <div class="contact-info">
+                <p>Contact: <a href="tel:0770865634">0770 86 56 34</a></p>
+                <p>Email: <a href="mailto:Groupetopexcellence@gmail.com">Groupetopexcellence@gmail.com</a></p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Arabic Content -->
+    <div class="lang-content" id="content-ar">
+        <header class="hero">
+            <img src="logo.png" alt="شعار TOP EXCELLENCE" class="logo">
+            <div class="hero-content">
+                <h1 class="animate-title" lang="ar">أتقن <span class="highlight">بحث الدكتوراه</span> مع الذكاء الاصطناعي</h1>
+                <p class="animate-subtitle">تدريب شامل من <strong>TOP EXCELLENCE</strong> لإحداث ثورة في منهجك للبحث الأكاديمي باستخدام الذكاء الاصطناعي.</p>
+                <a href="#inscription-ar" class="cta-button">ابدأ التدريب</a>
+            </div>
+        </header>
+        <main>
+            <section class="goal-section" id="goal-ar">
+                <div class="confetti-container"></div>
+                <h2>هدفكم: نشر مقال علمي</h2>
+                <p>تدريبنا ليس مجرد قائمة أدوات، بل هو منهجية متكاملة مصممة لنقلكم من الصفحة البيضاء إلى النشر في مجلة علمية مرموقة.</p>
+            </section>
+
+            <section class="target-audience-section" id="for-whom-ar">
+                <h2>لمن هذا التدريب؟</h2>
+                <p class="audience-intro">صُمم هذا التدريب لمجموعة واسعة من طلاب الدكتوراه والباحثين الذين يرغبون في دمج الذكاء الاصطناعي في منهجيتهم البحثية. وهو ملائم بشكل خاص للمجالات التالية:</p>
+                <div class="audience-grid">
+                    <div class="audience-item">الحاسوب والهندسة <span class="icon">💻</span></div>
+                    <div class="audience-item">الأحياء وعلوم الحياة <span class="icon">🧬</span></div>
+                    <div class="audience-item">العلوم الإنسانية والاجتماعية <span class="icon">👥</span></div>
+                    <div class="audience-item">الآداب والفنون <span class="icon">📖</span></div>
+                    <div class="audience-item">القانون والعلوم السياسية <span class="icon">⚖️</span></div>
+                    <div class="audience-item">الاقتصاد والإدارة <span class="icon">📈</span></div>
+                </div>
+            </section>
+            
+            <section class="intro-section" id="about-ar">
+                <h2>لماذا هذا التدريب؟</h2>
+                <div class="benefits-container">
+                    <div class="benefit-card"><div class="icon">🔍</div><h3>بحث ذكي</h3><p>أتقن التقنيات المتقدمة للبحث عن المقالات العلمية واستخدام الذكاء الاصطناعي لتحسين اكتشافاتك الببليوغرافية.</p></div>
+                    <div class="benefit-card"><div class="icon">🤖</div><h3>كتابة مدعومة بالذكاء الاصطناعي</h3><p>تعلم كيفية استخدام أدوات الذكاء الاصطناعي لتحسين كتابتك الأكاديمية وهيكلة أفكارك وإنتاج محتوى عالي الجودة.</p></div>
+                    <div class="benefit-card"><div class="icon">📊</div><h3>تصور البيانات</h3><p>حوّل بياناتك ونصوصك إلى رسوم بيانية مؤثرة باستخدام أدوات الذكاء الاصطناعي للتصور والعرض.</p></div>
+                    <div class="benefit-card"><div class="icon">📚</div><h3>تحليل المستندات</h3><p>تفاعل مع ملفات PDF الخاصة بك بلا حدود، وحلل الصور العلمية، واستخرج المعلومات الهامة تلقائيًا.</p></div>
+                    <div class="benefit-card"><div class="icon">⚖️</div><h3>تقييم المجلات العلمية</h3><p>تعلم كيفية تحديد المجلات عالية الجودة، وفهم أنواع المقالات المختلفة، وتقييم مصداقية المصادر.</p></div>
+                    <div class="benefit-card"><div class="icon">🎯</div><h3>توجيه متقدم (Prompting)</h3><p>أتقن فن كتابة الأوامر (Prompts) للحصول على أفضل النتائج من الذكاء الاصطناعي التوليدي وزيادة إنتاجيتك.</p></div>
+                </div>
+            </section>
+
+            <section class="program-section" id="programme-ar">
+                <h2>برنامج التدريب</h2>
+                <div class="modules-container">
+                    <div class="module-card"><div class="module-number">١</div><h3>البحث عن المقالات العلمية</h3><p>استراتيجيات بحث متقدمة، قواعد بيانات متخصصة، وتقنيات الترشيح الذكية.</p></div>
+                    <div class="module-card"><div class="module-number">٢</div><h3>الكتابة بمساعدة الذكاء الاصطناعي</h3><p>استخدام الذكاء الاصطناعي لهيكلة النصوص، الكتابة التعاونية، وتحسين الأسلوب الأكاديمي.</p></div>
+                    <div class="module-card"><div class="module-number">٣</div><h3>أدوات الذكاء الاصطناعي للمستندات</h3><p>محادثة غير محدودة مع PDF، تحليل الصور العلمية، ووكلاء الذكاء الاصطناعي المتخصصين.</p></div>
+                    <div class="module-card"><div class="module-number">٤</div><h3>إدارة البحث بالذكاء الاصطناعي</h3><p>تنظيم وتلخيص مكتبتك البحثية (Zotero، ResearchRabbit) وإنشاء خرائط معرفية.</p></div>
+                    <div class="module-card"><div class="module-number">٥</div><h3>التصور والعرض التقديمي</h3><p>إنشاء رسوم بيانية، توليد عروض PowerPoint، وتحويل البيانات إلى مرئيات.</p></div>
+                    <div class="module-card"><div class="module-number">٦</div><h3>أنواع المقالات الأكاديمية</h3><p>الفروق بين الأبحاث المسحية (surveys)، والتصنيفات (taxonomies)، والمراجعات (reviews).</p></div>
+                    <div class="module-card"><div class="module-number">٧</div><h3>تقييم المجلات العلمية</h3><p>معايير الجودة، معامل التأثير، المجلات المفترسة، واختيار أفضل المجلات.</p></div>
+                </div>
+            </section>
+            
+            <section class="support-section" id="support-ar">
+                <h2>أكثر من مجرد تدريب، إنها شراكة</h2>
+                <p class="support-intro">التزامنا لا ينتهي بانتهاء التدريب. نرافقكم حتى تحقيق هدفكم: النشر العلمي.</p>
+                <div class="support-grid">
+                    <div class="support-item"><div class="icon">📄</div><h3>مراجعة مسودة المقال</h3><p>استفد من مراجعة نقدية لأول مقال تكتبه بأساليبنا لضمان جودته.</p></div>
+                    <div class="support-item"><div class="icon">🎯</div><h3>المساعدة في اختيار المجلة</h3><p>نساعدك في تحديد واختيار المجلة العلمية الأكثر ملاءمة ومكانة لنشر بحثك.</p></div>
+                    <div class="support-item"><div class="icon">💬</div><h3>دعم مستمر</h3><p>انضم إلى مجموعة متابعة لطرح أسئلتك والحصول على المساعدة حتى بعد انتهاء البرنامج.</p></div>
+                </div>
+            </section>
+            
+            <section class="inscription-section" id="inscription-ar">
+                <h2>هل أنت مستعد لنشر مقالك؟</h2>
+                <p class="support-intro">انضم إلينا وحوّل بحث الدكتوراه الخاص بك إلى منشور من الدرجة الأولى. المقاعد محدودة.</p>
+                <div class="form-container">
+                    <p class="form-instruction">املأ الاستمارة لحجز مقعدك.</p>
+                    <div class="form-details">
+                        <p><strong>المدة:</strong> 30 ساعة من التدريب العملي.</p>
+                        <p><strong>السعر:</strong> تواصلوا معنا عبر البريد الإلكتروني للمزيد من المعلومات.</p>
+                    </div>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdh3ShlxOE_Nql94Q7OEwktxgnByBLgMiBqrzSY5Av1rMuSXA/viewform?usp=dialog" class="google-form-button">سجل الآن</a>
+                    <p class="form-help">ستتلقى رسالة تأكيد عبر البريد الإلكتروني بعد التسجيل.</p>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p class="copyright">© 2025 TOP EXCELLENCE - جميع الحقوق محفوظة.</p>
+            <div class="contact-info">
+                <p>للتواصل: <a href="tel:0770865634">0770 86 56 34</a></p>
+                <p>البريد الإلكتروني: <a href="mailto:Groupetopexcellence@gmail.com">Groupetopexcellence@gmail.com</a></p>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        function switchLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('content-' + lang).classList.add('active');
+            document.querySelector(`.lang-btn[onclick="switchLanguage('${lang}')"]`).classList.add('active');
+        }
+
+        // --- Confetti Animation ---
+        const goalSection = document.querySelector('#goal-fr'); // Observe one element
+        const confettiContainers = document.querySelectorAll('.confetti-container');
+        const confettiColors = ['#f59e0b', '#fbbf24', '#3b82f6', '#ffffff', '#1e3a8a'];
+
+        function createConfetti(container) {
+            if (container.children.length > 0) return; // Don't add more if already exists
+            for (let i = 0; i < 100; i++) { // Reduced for better performance
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                confetti.style.animationDelay = Math.random() * 4 + 's';
+                confetti.style.animationDuration = Math.random() * 3 + 4 + 's';
+                container.appendChild(confetti);
+            }
+        }
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    confettiContainers.forEach(createConfetti);
+                }
+            });
+        }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
+
+        if(goalSection) observer.observe(goalSection);
+
+    </script>
+</body>
+</html>
